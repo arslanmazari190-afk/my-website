@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>Mazari Aviator — Crash Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="Mazari Aviator game">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M4 20.4 28 7l-7.9 20-4.2-8.2L4 20.4Z" fill="currentColor"/><path d="m15.9 18.8 5.3-6.2" stroke="#ff879a" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div><div class="brand-name">mazari aviator</div><div class="brand-caption">Crash &amp; fly</div></div>
+      </div>
+      <div class="topbar-right">
+        <div class="balance-card" aria-live="polite">
+          <div class="balance-label">Demo balance</div>
+          <div class="balance-value" id="balanceValue">PKR 1,000.00</div>
+        </div>
+        <button class="sound-button" id="soundToggle" type="button" aria-label="Turn sound on" title="Sound off">
+          <svg id="soundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="m19 5-6 14"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="game-frame">
+      <section class="history-strip" aria-label="Recent round multipliers">
+        <span class="strip-label">Last rounds</span>
+        <div class="round-list" id="roundHistory"><span class="round-chip">—</span></div>
+      </section>
+      <div class="game-layout">
+        <section class="main-column" aria-label="Game">
+          <div class="status-line">
+            <div class="live-status" id="statusLine"><span class="status-dot"></span><span id="statusText">Waiting for next round</span></div>
+            <span class="round-id" id="roundId">ROUND #0001</span>
+          </div>
+          <div class="chart-wrap" id="chartWrap">
+            <canvas id="gameCanvas" aria-label="Animated multiplier graph"></canvas>
+            <div class="chart-overlay" aria-live="polite">
+              <div class="multiplier" id="multiplier">1.00x</div>
+              <div class="game-message" id="gameMessage"><span class="countdown" id="countdown">Starting in 5.0s</span></div>
+            </div>
+          </div>
+          <div class="below-chart">
+            <span class="fair-note">Demo game · Virtual credits only · No real-money betting</span>
+            <span class="players-online">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span id="onlineCount">1,284</span> online
+            </span>
+          </div>
+          <div class="bet-grid" id="betGrid" aria-label="Bet controls"></div>
+        </section>
+
+        <aside class="sidebar" aria-label="Bet activity">
+          <div class="sidebar-heading"><h2>Bet activity</h2><span class="round-id">LIVE</span></div>
+          <div class="tab-list" role="tablist" aria-label="Bet activity tabs">
+            <button class="tab-button active" id="liveTabButton" type="button" role="tab" aria-selected="true" aria-controls="liveTab">Live bets</button>
+            <button class="tab-button" id="myTabButton" type="button" role="tab" aria-selected="false" aria-controls="myTab">My bets</button>
+          </div>
+          <section class="tab-content active" id="liveTab" role="tabpanel" aria-labelledby="liveTabButton">
+            <div class="list-head"><span>Player</span><span>Bet</span><span>Result</span></div>
+            <div class="bet-list" id="liveBets"></div>
+          </section>
+          <section class="tab-content" id="myTab" role="tabpanel" aria-labelledby="myTabButton">
+            <div class="list-head"><span>Round / bet</span><span>At</span><span>P/L</span></div>
+            <div class="bet-list" id="myBets"></div>
+          </section>
+          <div class="sidebar-foot">Place your demo bet before takeoff. Cash out while the plane is in flight to lock in your multiplier.</div>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
